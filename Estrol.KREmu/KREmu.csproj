@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>netcoreapp3.1;net472</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>KREmu</AssemblyName>
+    <Authors>Estrol</Authors>
+    <Company>Estrol Dev.</Company>
+    <Product>O2-JAM 3.8 Emulator</Product>
+    <Description>An O2-JAM Server Emulation for O2-JAM version 3.8 by Estrol#0021 for O2-JAM Community</Description>
+    <RepositoryUrl>https://github.com/estrol/KREmu</RepositoryUrl>
+    <Copyright>Copyright @ 2020 Estrol Mendex</Copyright>
+    <RootNamespace>Estrol.KREmu</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\onButtonExit.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\onButtonExit.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Servers\Parser\Types\" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.1" />
+  </ItemGroup>
+
+</Project>

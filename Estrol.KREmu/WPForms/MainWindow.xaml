@@ -1,0 +1,130 @@
+﻿<Window x:Class="Estrol.KREmu.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="356" Width="639" WindowStyle="None" ResizeMode="CanMinimize" AllowsTransparency="True" Foreground="{x:Null}" Background="{x:Null}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TabItemText" TargetType="{x:Type TextBlock}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=TabItem}}" Value="True">
+                        <Setter Property="Foreground" Value="Black"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=TabItem}}" Value="False">
+                        <Setter Property="Foreground" Value="White"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="{x:Type TabItem}">
+                <Setter Property="Background" Value="Black" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TabItem}">
+                            <Grid>
+                                <Border Name="Border"
+                                    BorderThickness="1,1,1,1" 
+                                    CornerRadius="0,0,0,0" 
+                                    Height="50">
+                                    <ContentPresenter x:Name="ContentSite"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"
+                                                  ContentSource="Header"
+                                                  Margin="12,2,12,2"
+                                                  RecognizesAccessKey="True"/>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="White"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="False">
+                                    <Setter TargetName="Border" Property="Background" Value="#FF646464" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid x:Name="MainGrid" Background="#FF515050" Margin="10">
+        <Grid.Effect>
+            <DropShadowEffect Color="Black" Opacity="1" BlurRadius="15" ShadowDepth="0"/>
+        </Grid.Effect>
+        <Canvas Height="24" VerticalAlignment="Top" Background="#FF303030" MouseDown="Canvas_MouseDown">
+            <Label Content="KREmu - O2-JAM 3.8 Emulator" Canvas.Top="-1" Foreground="White" Background="{x:Null}"/>
+            <Button Height="18" Canvas.Left="596" Width="20" BorderBrush="{x:Null}" Click="Button_Click" Canvas.Top="3" Foreground="White">
+                <Button.OpacityMask>
+                    <ImageBrush ImageSource="/Assets/onButtonExit.png"/>
+                </Button.OpacityMask>
+                <Button.Background>
+                    <ImageBrush ImageSource="/Assets/onButtonExit.png" Stretch="Fill"/>
+                </Button.Background>
+            </Button>
+        </Canvas>
+        <Canvas Height="1" VerticalAlignment="Top" Background="#FF171717" Margin="0,24,0,0"/>
+
+        <Grid Name="MainControl" Margin="0,24,0,0" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="72*"/>
+                <ColumnDefinition Width="547*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="51*"/>
+                <RowDefinition Height="53*"/>
+            </Grid.RowDefinitions>
+            <Canvas HorizontalAlignment="Left" Width="144" Background="#FF363636" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <Label Foreground="White" Content="KREmu" Height="38" Width="70" Canvas.Left="38" Canvas.Top="239" FontWeight="Bold" FontSize="16"/>
+                <Label Foreground="White" Content="O2-JAM 3.8 Emulator" Height="31" Width="124" Canvas.Left="10" Canvas.Top="271" FontWeight="Normal"/>
+            </Canvas>
+            <TabControl TabStripPlacement="Left" BorderBrush="Transparent" Background="Transparent" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <TabItem HorizontalAlignment="Center" Width="141">
+                    <TabItem.Header>
+                        <TextBlock Text="Dashboard" Style="{StaticResource TabItemText}"/>
+                    </TabItem.Header>
+                    <Grid Background="Transparent">
+                        <TextBox Name="ConsoleWindow" Margin="0,0,0,57" Text="" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Foreground="Lime" Background="Black" BorderBrush="Black" IsReadOnly="True"/>
+                        <Button Name="StartButton" Content="Start Game" Margin="2,260,332,10" Background="#FF5F5F5F" BorderBrush="#FFC5C5C5" Foreground="White"/>
+                        <Button Name="ReloadButton" Content="Reload Data" Margin="141,260,193,10" Background="#FF5F5F5F" BorderBrush="#FFC5C5C5" Foreground="White"/>
+                    </Grid>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock Text="Settings" Style="{StaticResource TabItemText}"/>
+                    </TabItem.Header>
+                    <Grid Background="Transparent">
+                        <TabControl>
+                            <TabItem Height="25" VerticalAlignment="Top" Margin="0,-3,0,0">
+                                <TabItem.Header>
+                                    <TextBlock Text="Server Settings" Style="{StaticResource TabItemText}" Margin="0,-20,0,2"/>
+                                </TabItem.Header>
+                                <Grid Background="#FFE5E5E5"/>
+                            </TabItem>
+                            <TabItem Height="25" VerticalAlignment="Top" Margin="0,-3,0,0">
+                                <TabItem.Header>
+                                    <TextBlock Text="Player Settings" Style="{StaticResource TabItemText}" Margin="0,-20,0,2"/>
+                                </TabItem.Header>
+                                <Grid Background="#FFE5E5E5"/>
+                            </TabItem>
+                            <TabItem Height="25" VerticalAlignment="Top" Margin="0,-3,0,0">
+                                <TabItem.Header>
+                                    <TextBlock Text="Client Settings" Style="{StaticResource TabItemText}" Margin="0,-20,0,2"/>
+                                </TabItem.Header>
+                                <Grid Background="#FFE5E5E5"/>
+                            </TabItem>
+                        </TabControl>
+                    </Grid>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock Text="About" Style="{StaticResource TabItemText}"/>
+                    </TabItem.Header>
+                    <Grid Background="Transparent"/>
+                </TabItem>
+            </TabControl>
+
+        </Grid>
+    </Grid>
+</Window>
